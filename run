@@ -1,0 +1,8 @@
+#- b
+    nasm src/boot.asm -o out/boot.bin
+    dd if=out/boot.bin of=out/osdev.img
+#/
+
+#- r
+    qemu-system-x86_64 out/osdev.img
+#/
