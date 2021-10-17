@@ -16,6 +16,8 @@ feliz_kernel_start:
     mov di, shell_buffer
     call feliz_shell_prompt
 
+    mov si, feliz_kernel_text_unknown_command
+    call feliz_shell_print_string
     mov si, shell_buffer
     call feliz_shell_print_line
 
@@ -29,6 +31,7 @@ feliz_kernel_start:
 
 feliz_kernel_text_start: db "Kernel: Started", 0
 feliz_kernel_text_welcome: db "FelizOS 0.0", 0
+feliz_kernel_text_unknown_command: db "Unknown command: ", 0
 
 %include "keyboard.asm"
 %include "shell.asm"
