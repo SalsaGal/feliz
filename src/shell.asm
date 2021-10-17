@@ -25,6 +25,7 @@ feliz_shell_print_char:
 ; si - String pointer
 feliz_shell_print_string:
     push ax
+    push si
     mov ah, 0xe
 
 .loop:
@@ -35,6 +36,25 @@ feliz_shell_print_string:
     jmp .loop
 
 .end:
+    pop si
+    pop ax
+    ret
+
+; IN:
+; si - String pointer
+feliz_shell_print_line:
+    push ax
+    push si
+
+    call feliz_shell_print_string
+
+    mov ah, 0xe
+    mov al, 0xd
+    int 0x10
+    mov al, 0xa
+    int 0x10
+
+    pop si
     pop ax
     ret
 
