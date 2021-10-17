@@ -15,17 +15,29 @@ feliz_shell_prompt:
     cmp al, 0xd
     je .return
 
+    cmp byte [di], 1
+    je .loop
+
     stosb
     call feliz_shell_print_char
     jmp .loop
 
 .backspace:
+    cmp byte [di - 1], 1
+    je .loop
+
+    ; Move the screen cursor
     mov ah, 0xe
     int 0x10
     mov al, ' '
     int 0x10
     mov al, 8
     int 0x10
+
+    ; Update the value in the buffer
+    dec di
+    mov byte [di], 0
+    
     jmp .loop
 
 .return:
@@ -51,8 +63,8 @@ feliz_shell_print_string:
 
 .loop:
     lodsb
-    cmp al, 0
-    je .end
+    cmp al, 20
+    jle .end
     int 0x10
     jmp .loop
 
