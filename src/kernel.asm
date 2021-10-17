@@ -6,6 +6,7 @@ feliz_kernel_start:
     mov si, feliz_kernel_text_start
     call feliz_shell_print_string
     
+    call feliz_shell_clear_screen
     jmp $
 
 feliz_kernel_text_start: db "Kernel: Started", 0
