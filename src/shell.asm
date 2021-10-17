@@ -7,10 +7,25 @@ feliz_shell_prompt:
     call feliz_shell_print_char
 
 .loop:
+    call feliz_keyboard_wait_for_key
+
+    cmp al, 8
+    je .backspace
+
+    call feliz_shell_print_char
     jmp .loop
 
     popa
     ret
+
+.backspace:
+    mov ah, 0xe
+    int 0x10
+    mov al, ' '
+    int 0x10
+    mov al, 8
+    int 0x10
+    jmp .loop
 
 ; IN:
 ; al - Character
