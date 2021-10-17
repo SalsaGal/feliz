@@ -6,8 +6,10 @@ feliz_kernel_start:
 
     mov si, feliz_kernel_text_start
     call feliz_shell_print_string
-
     call feliz_shell_clear_screen
+
+    mov si, feliz_kernel_text_welcome
+    call feliz_shell_print_line
 
 .shell:
     call feliz_shell_print_newline
@@ -26,6 +28,7 @@ feliz_kernel_start:
     jmp .shell
 
 feliz_kernel_text_start: db "Kernel: Started", 0
+feliz_kernel_text_welcome: db "FelizOS 0.0", 0
 
 %include "keyboard.asm"
 %include "shell.asm"
