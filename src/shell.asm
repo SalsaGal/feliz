@@ -1,4 +1,18 @@
 ; IN:
+; di - Buffer destination
+feliz_shell_prompt:
+    pusha
+
+    mov al, '>'
+    call feliz_shell_print_char
+
+.loop:
+    jmp .loop
+
+    popa
+    ret
+
+; IN:
 ; al - Character
 feliz_shell_print_char:
     push ax
