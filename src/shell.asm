@@ -1,5 +1,5 @@
 ; IN:
-; di - Buffer destination
+; es:di - Buffer destination
 feliz_shell_prompt:
     pusha
 
@@ -12,11 +12,12 @@ feliz_shell_prompt:
     cmp al, 8
     je .backspace
 
+    cmp al, 0xd
+    je .return
+
+    stosb
     call feliz_shell_print_char
     jmp .loop
-
-    popa
-    ret
 
 .backspace:
     mov ah, 0xe
@@ -26,6 +27,11 @@ feliz_shell_prompt:
     mov al, 8
     int 0x10
     jmp .loop
+
+.return:
+    popa
+    call feliz_shell_print_newline
+    ret
 
 ; IN:
 ; al - Character
@@ -58,18 +64,18 @@ feliz_shell_print_string:
 ; IN:
 ; si - String pointer
 feliz_shell_print_line:
-    push ax
-    push si
-
     call feliz_shell_print_string
+    call feliz_shell_print_newline
 
+    ret
+
+feliz_shell_print_newline:
+    push ax
     mov ah, 0xe
     mov al, 0xd
     int 0x10
     mov al, 0xa
     int 0x10
-
-    pop si
     pop ax
     ret
 
