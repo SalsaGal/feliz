@@ -1,4 +1,13 @@
 ; IN:
+; al - Character
+feliz_shell_print_char:
+    push ax
+    mov ah, 0xe
+    int 0x10
+    pop ax
+    ret
+
+; IN:
 ; si - String pointer
 feliz_shell_print_string:
     push ax
