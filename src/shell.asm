@@ -64,7 +64,7 @@ feliz_shell_print_string:
 .loop:
     lodsb
     cmp al, 20
-    jle .end
+    jl .end
     int 0x10
     jmp .loop
 
