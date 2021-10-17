@@ -1,11 +1,11 @@
 #- b
-    nasm src/boot.asm -o out/boot.bin
-    nasm src/kernel.asm -o out/kernel.bin
-    dd if=/dev/zero of=out/osdev.img bs=1024 count=1440
-    dd if=out/boot.bin of=out/osdev.img conv=notrunc
-    dd if=out/kernel.bin of=out/osdev.img conv=notrunc seek=1
+    nasm src/boot.asm -o out/boot.bin -i src
+    nasm src/kernel.asm -o out/kernel.bin -i src
+    dd if=/dev/zero of=out/feliz.img bs=1024 count=1440
+    dd if=out/boot.bin of=out/feliz.img conv=notrunc
+    dd if=out/kernel.bin of=out/feliz.img conv=notrunc seek=1
 #/
 
 #- r
-    qemu-system-x86_64 -fda out/osdev.img -monitor stdio -serial file:out/log
+    qemu-system-x86_64 -fda out/feliz.img -monitor stdio -serial file:out/log
 #/
