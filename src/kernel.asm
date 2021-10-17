@@ -29,6 +29,7 @@ feliz_kernel_text_start: db "Kernel: Started", 0
 
 %include "keyboard.asm"
 %include "shell.asm"
+%include "string.asm"
 
 db 1
 shell_buffer: times 78 db 0
