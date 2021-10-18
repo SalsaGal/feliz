@@ -23,13 +23,6 @@ feliz_kernel_start:
     mov ah, ' '
     call feliz_string_split
 
-    mov si, word [misc_buffer]
-    call feliz_shell_print_line
-    mov si, word [misc_buffer + 2]
-    call feliz_shell_print_line
-    mov si, word [misc_buffer + 4]
-    call feliz_shell_print_line
-
     mov al, 0
 .clear_buffer:
     stosb
