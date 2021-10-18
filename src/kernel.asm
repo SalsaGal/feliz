@@ -36,7 +36,7 @@ feliz_kernel_start:
     ; Print unknown command message
     mov si, feliz_kernel_text_unknown_command
     call feliz_shell_print_string
-    mov si, shell_buffer
+    mov si, [misc_buffer]
     call feliz_shell_print_line
 
     mov al, 0
