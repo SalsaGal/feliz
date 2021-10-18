@@ -53,6 +53,7 @@ feliz_string_split:
     jmp .loop
 
 .end:
+    ; Put a final null byte at the end to mark the end
     mov word [di], 0
     popa
     ret

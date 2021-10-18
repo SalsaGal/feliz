@@ -33,7 +33,14 @@ feliz_kernel_start:
     mov ah, ' '
     call feliz_string_split
 
+    ; Print unknown command message
+    mov si, feliz_kernel_text_unknown_command
+    call feliz_shell_print_string
+    mov si, shell_buffer
+    call feliz_shell_print_line
+
     mov al, 0
+    mov di, shell_buffer
 .clear_buffer:
     stosb
     cmp byte [di], 1
