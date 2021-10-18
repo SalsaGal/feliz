@@ -1,3 +1,13 @@
+feliz_kernel_call_vectors:
+    jmp word feliz_kernel_start
+    jmp word feliz_shell_print_char
+    jmp word feliz_shell_print_string
+    jmp word feliz_keyboard_wait_for_key
+    jmp word feliz_serial_print_char
+    jmp word feliz_serial_print_string
+    jmp word feliz_string_equal
+    jmp word feliz_string_split
+
 feliz_kernel_start:
     ; Update data segment
     mov ax, 0x0800
@@ -43,4 +53,4 @@ feliz_kernel_text_unknown_command: db "Unknown command: ", 0
 db 1
 shell_buffer: times 78 db 0
 db 1
-misc_buffer: times 64 db 0
+misc_buffer: times 78 db 0

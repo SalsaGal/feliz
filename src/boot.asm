@@ -18,9 +18,9 @@ feliz_boot_start:
     int 0x13
     jc .feliz_boot_fail_disk_reset
 
-    ; Load sector with kernel
+    ; Load sectors with kernel
     mov ah, 2
-    mov al, 1
+    mov al, 2   ; Sector count
     mov ch, 0
     mov cl, 2
     mov dx, 0   
