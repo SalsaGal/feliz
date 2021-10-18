@@ -7,6 +7,7 @@ feliz_kernel_call_vectors:
     jmp word feliz_serial_print_string
     jmp word feliz_string_equal
     jmp word feliz_string_split
+    jmp word feliz_shell_instruction_to_call
 
 feliz_kernel_start:
     ; Update data segment
@@ -33,12 +34,20 @@ feliz_kernel_start:
     mov ah, ' '
     call feliz_string_split
 
+    ; Get system calls from command
+    call feliz_shell_instruction_to_call
+    jc .unknown_instruction
+
+    jmp .finish_instruction
+
+.unknown_instruction:
     ; Print unknown command message
     mov si, feliz_kernel_text_unknown_command
     call feliz_shell_print_string
     mov si, [misc_buffer]
     call feliz_shell_print_line
 
+.finish_instruction:
     mov al, 0
     mov di, shell_buffer
 .clear_buffer:

@@ -120,3 +120,34 @@ feliz_shell_clear_screen:
 
     popa
     ret
+
+; IN:
+; si - Instruction
+;
+; OUT:
+; carry - set if 
+feliz_shell_instruction_to_call:
+    pusha
+
+    ; Determine instruction name
+    mov di, .instruction_reboot
+    call feliz_string_equal
+    jnc .not_reboot
+
+    ; Reboot
+    int 0x19
+    jmp .end_no_carry
+
+.not_reboot:
+
+.end_carry:
+    popa
+    stc
+    ret
+
+.end_no_carry:
+    popa
+    clc
+    ret
+
+.instruction_reboot: db "reboot", 0
