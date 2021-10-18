@@ -125,7 +125,7 @@ feliz_shell_clear_screen:
 ; si - Instruction
 ;
 ; OUT:
-; carry - set if 
+; carry - set if valid instruction
 feliz_shell_instruction_to_call:
     pusha
 
