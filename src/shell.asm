@@ -139,6 +139,15 @@ feliz_shell_instruction_to_call:
     jmp .end_no_carry
 
 .not_reboot:
+    mov di, .instruction_clear
+    call feliz_string_equal
+    jnc .not_clear
+
+    ; Clear
+    call feliz_shell_clear_screen
+    jmp .end_no_carry
+
+.not_clear:
 
 .end_carry:
     popa
@@ -150,4 +159,5 @@ feliz_shell_instruction_to_call:
     clc
     ret
 
+.instruction_clear: db "clear", 0
 .instruction_reboot: db "reboot", 0
