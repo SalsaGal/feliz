@@ -63,7 +63,7 @@ feliz_shell_print_string:
 
 .loop:
     lodsb
-    cmp al, 20
+    cmp al, 1
     jl .end
     int 0x10
     jmp .loop
@@ -162,6 +162,15 @@ feliz_shell_instruction_to_call:
     int 0x15
 
 .not_shutdown:
+    mov di, .instruction_help
+    call feliz_string_equal
+    jnc .not_help
+
+    mov si, .help_message
+    call feliz_shell_print_line
+    jmp .end_no_carry
+
+.not_help:
 
 .end_carry:
     popa
@@ -174,5 +183,13 @@ feliz_shell_instruction_to_call:
     ret
 
 .instruction_clear: db "clear", 0
+.instruction_help: db "help", 0
 .instruction_reboot: db "reboot", 0
 .instruction_shutdown: db "shutdown", 0
+
+.help_message: db "Feliz Shell Instructions:", 0xa, 0xd
+db "clear: clear the screen", 0xa, 0xd
+db "help: print this help message", 0xa, 0xd
+db "reboot: reboot the computer", 0xa, 0xd
+db "shutdown: shutdown the computer"
+db 0
