@@ -7,6 +7,9 @@ feliz_kernel_call_vectors:
     jmp word feliz_serial_print_string
     jmp word feliz_string_equal
     jmp word feliz_string_split
+    jmp word feliz_shell_clear_screen
+    jmp word feliz_shell_print_newline
+    jmp word feliz_shell_move_cursor
     jmp word feliz_shell_instruction_to_call
     jmp word feliz_string_byte_to_ascii
 

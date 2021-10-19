@@ -94,7 +94,7 @@ feliz_shell_print_newline:
 ; IN:
 ; dl - x
 ; dh - y
-feliz_move_cursor:
+feliz_shell_move_cursor:
     pusha
 
     mov ah, 2
@@ -108,7 +108,7 @@ feliz_shell_clear_screen:
     pusha
 
     mov dx, 0
-    call feliz_move_cursor
+    call feliz_shell_move_cursor
 
     mov ah, 6
     mov al, 0
