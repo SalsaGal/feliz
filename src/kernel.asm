@@ -65,6 +65,7 @@ feliz_kernel_text_start: db "Kernel: Started", 0
 feliz_kernel_text_welcome: db "FelizOS 0.0", 0
 feliz_kernel_text_unknown_command: db "Unknown command: ", 0
 
+%include "disk.asm"
 %include "keyboard.asm"
 %include "serial.asm"
 %include "shell.asm"

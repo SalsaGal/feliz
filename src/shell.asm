@@ -123,11 +123,14 @@ feliz_shell_clear_screen:
 
 ; IN:
 ; si - Instruction
+; di - Instruction token addresses
 ;
 ; OUT:
 ; carry - set if valid instruction
 feliz_shell_instruction_to_call:
     pusha
+
+    push di
 
     ; Determine instruction name
     mov di, .instruction_reboot
@@ -172,24 +175,40 @@ feliz_shell_instruction_to_call:
     jmp .end_no_carry
 
 .not_help:
+    mov di, .instruction_disk
+    call feliz_string_equal
+    jnc .not_disk
+
+    ; Disk
+    pop di
+    call feliz_disk_shell_command
+    push di                             ; Push this back to the stack to pop it off at the end of the function
+    jmp .end_no_carry
+
+.not_disk:
 
 .end_carry:
+    pop di
     popa
     stc
     ret
 
 .end_no_carry:
+    pop di
     popa
     clc
     ret
 
 .instruction_clear: db "clear", 0
+.instruction_disk: db "disk", 0
 .instruction_help: db "help", 0
 .instruction_reboot: db "reboot", 0
 .instruction_shutdown: db "shutdown", 0
 
-.help_message: db "Feliz Shell Instructions:", 0xa, 0xd
+.help_message:
+db "Feliz Shell Instructions:", 0xa, 0xd
 db "clear:              clear the screen", 0xa, 0xd
+db "disk:               disk storage operations", 0xa, 0xd
 db "help:               print this help message", 0xa, 0xd
 db "reboot:             reboot the computer", 0xa, 0xd
 db "shutdown:           shutdown the computer"
