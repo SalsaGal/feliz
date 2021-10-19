@@ -166,6 +166,7 @@ feliz_shell_instruction_to_call:
     call feliz_string_equal
     jnc .not_help
 
+    ; Help
     mov si, .help_message
     call feliz_shell_print_line
     jmp .end_no_carry
@@ -188,8 +189,8 @@ feliz_shell_instruction_to_call:
 .instruction_shutdown: db "shutdown", 0
 
 .help_message: db "Feliz Shell Instructions:", 0xa, 0xd
-db "clear: clear the screen", 0xa, 0xd
-db "help: print this help message", 0xa, 0xd
-db "reboot: reboot the computer", 0xa, 0xd
-db "shutdown: shutdown the computer"
+db "clear:              clear the screen", 0xa, 0xd
+db "help:               print this help message", 0xa, 0xd
+db "reboot:             reboot the computer", 0xa, 0xd
+db "shutdown:           shutdown the computer"
 db 0
