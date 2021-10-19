@@ -46,7 +46,6 @@ feliz_disk_shell_command:
 .subcommand_help: db "help", 0
 
 .help_text:
-db "disk [subcommand]", 0xa, 0xd
-db "help:               print this help message", 0
+db "disk help:          print this help message", 0
 .missing_subcommand_text: db "Missing subcommand", 0
 .unknown_subcommand_text: db "Unknown subcommand: ", 0
