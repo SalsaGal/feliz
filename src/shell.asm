@@ -148,6 +148,20 @@ feliz_shell_instruction_to_call:
     jmp .end_no_carry
 
 .not_clear:
+    mov di, .instruction_shutdown
+    call feliz_string_equal
+    jnc .not_shutdown
+
+    ; Shutdown
+    mov ax, 0x1000
+    mov ax, ss
+    mov sp, 0xf000
+    mov ax, 0x5307
+    mov bx, 0x0001
+    mov cx, 0x0003
+    int 0x15
+
+.not_shutdown:
 
 .end_carry:
     popa
@@ -161,3 +175,4 @@ feliz_shell_instruction_to_call:
 
 .instruction_clear: db "clear", 0
 .instruction_reboot: db "reboot", 0
+.instruction_shutdown: db "shutdown", 0
