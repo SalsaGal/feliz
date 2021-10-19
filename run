@@ -6,6 +6,14 @@
     dd if=out/kernel.bin of=out/feliz.img conv=notrunc seek=1
 #/
 
+#usb b
+    nasm src/boot.asm -o out/boot.bin -i src
+    nasm src/kernel.asm -o out/kernel.bin -i src
+    dd if=/dev/zero of=/dev/sdc bs=1024 count=1440
+    dd if=out/boot.bin of=/dev/sdc conv=notrunc
+    dd if=out/kernel.bin of=/dev/sdc conv=notrunc seek=1
+#/
+
 #- r
     qemu-system-x86_64 out/feliz.img -monitor stdio -serial file:out/log
 #/

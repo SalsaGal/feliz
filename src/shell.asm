@@ -138,7 +138,7 @@ feliz_shell_instruction_to_call:
     jnc .not_reboot
 
     ; Reboot
-    int 0x19
+    jmp 0xffff:0
     jmp .end_no_carry
 
 .not_reboot:
