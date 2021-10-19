@@ -57,3 +57,41 @@ feliz_string_split:
     mov word [di], 0
     popa
     ret
+
+; IN:
+; al - number
+; es:di - location to write string
+feliz_string_byte_to_ascii:
+    pusha
+    mov ah, 0xe
+    mov bx, 0
+
+    ; High nibble
+    push ax
+    and al, 0xf0
+    shr al, 4
+    add al, 0x30
+
+    cmp al, 0x3a
+    jl .high_not_hex
+    add al, 0x27
+
+.high_not_hex:
+    stosb
+    pop ax
+
+    ; Low nibble
+    push ax
+    and al, 0x0f
+    add al, 0x30
+
+    cmp al, 0x3a
+    jl .low_not_hex
+    add al, 0x27
+
+.low_not_hex:
+    stosb
+    pop ax
+
+    popa
+    ret

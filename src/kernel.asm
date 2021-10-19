@@ -8,6 +8,7 @@ feliz_kernel_call_vectors:
     jmp word feliz_string_equal
     jmp word feliz_string_split
     jmp word feliz_shell_instruction_to_call
+    jmp word feliz_string_byte_to_ascii
 
 feliz_kernel_start:
     ; Update data segment
