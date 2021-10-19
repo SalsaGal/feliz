@@ -61,6 +61,81 @@ feliz_kernel_start:
 
     jmp .shell
 
+feliz_kernel_panic:
+    mov di, misc_buffer
+
+    mov si, .panic_text_0
+    call feliz_shell_print_line
+
+    mov si, .panic_text_1
+    call feliz_shell_print_string
+    push ax
+    mov al, ah
+    call feliz_string_byte_to_ascii
+    pop ax
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_2
+    call feliz_shell_print_string
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_3
+    call feliz_shell_print_string
+    mov al, bh
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_4
+    call feliz_shell_print_string
+    mov al, bl
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_5
+    call feliz_shell_print_string
+    mov al, ch
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_6
+    call feliz_shell_print_string
+    mov al, cl
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_7
+    call feliz_shell_print_string
+    mov al, dh
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    mov si, .panic_text_8
+    call feliz_shell_print_string
+    mov al, dl
+    call feliz_string_byte_to_ascii
+    mov si, misc_buffer
+    call feliz_shell_print_line
+
+    jmp $
+
+.panic_text_0: db "FELIZ KERNEL PANIC", 0
+.panic_text_1: db "ah: 0x", 0
+.panic_text_2: db "al: 0x", 0
+.panic_text_3: db "bh: 0x", 0
+.panic_text_4: db "bl: 0x", 0
+.panic_text_5: db "ch: 0x", 0
+.panic_text_6: db "cl: 0x", 0
+.panic_text_7: db "dh: 0x", 0
+.panic_text_8: db "dl: 0x", 0
+
 feliz_kernel_text_start: db "Kernel: Started", 0
 feliz_kernel_text_welcome: db "FelizOS 0.0", 0
 feliz_kernel_text_unknown_command: db "Unknown command: ", 0
