@@ -7,5 +7,5 @@
 #/
 
 #- r
-    qemu-system-x86_64 -fda out/feliz.img -monitor stdio -serial file:out/log
+    qemu-system-x86_64 out/feliz.img -monitor stdio -serial file:out/log
 #/

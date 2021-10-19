@@ -14,7 +14,6 @@ feliz_boot_start:
 
     ; Reset disk
     mov ax, 0
-    mov dl, 0
     int 0x13
     jc .feliz_boot_fail_disk_reset
 
@@ -23,7 +22,7 @@ feliz_boot_start:
     mov al, 2   ; Sector count
     mov ch, 0
     mov cl, 2
-    mov dx, 0   
+    mov dh, 0
     
     mov bx, 0x800
     mov es, bx
@@ -39,12 +38,41 @@ feliz_boot_start:
 .feliz_boot_fail_disk_reset:
     mov si, feliz_boot_text_fail_reset
     call feliz_boot_string
+    mov al, ah
+    call feliz_boot_print_number
     jmp $
 
 .feliz_boot_fail_load_kernel:
     mov si, feliz_boot_text_fail_load
     call feliz_boot_string
+    mov al, ah
+    call feliz_boot_print_number
     jmp $
+
+; IN:
+; al - number
+feliz_boot_print_number:
+    pusha
+    mov ah, 0xe
+    mov bx, 0
+
+    ; High nibble
+    push ax
+    and al, 0xf0
+    shr al, 4
+    add al, 0x30
+    int 0x10
+    pop ax
+
+    ; Low nibble
+    push ax
+    and al, 0x0f
+    add al, 0x30
+    int 0x10
+    pop ax
+
+    popa
+    ret
 
 feliz_boot_string:
     push ax
@@ -63,8 +91,8 @@ feliz_boot_string:
 
 feliz_boot_text_start: db "Boot: Started", 0xa, 0xd, 0
 feliz_boot_text_kernel_loaded: db "Boot: Kernel loaded", 0xa, 0xd, 0
-feliz_boot_text_fail_reset: db "Boot: Failed disk reset", 0
-feliz_boot_text_fail_load: db "Boot: Failed to load kernel", 0
+feliz_boot_text_fail_reset: db "Boot: Failed disk reset #", 0
+feliz_boot_text_fail_load: db "Boot: Failed to load kernel #", 0
 
 times 510-($-$$) db 0
 dw 0xaa55
