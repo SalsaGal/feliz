@@ -118,3 +118,42 @@ feliz_string_get_length:
     pop ax
     pop si
     ret
+
+; IN:
+; si - string
+;
+; OUT:
+; ah - value
+feliz_string_ascii_to_byte:
+    push si
+    push bx
+
+    ; Check if it is only one character
+    mov ah, byte [si + 1]
+    cmp ah, 0
+    je .low
+
+.high:
+    mov ah, byte [si]
+    sub ah, 0x30
+    cmp ah, 0xa
+    jl .high_not_hex
+    sub ah, 0x27
+
+.high_not_hex:
+    shl ah, 4
+    inc si
+
+.low:
+    mov bh, byte [si]
+    sub bh, 0x30
+    cmp bh, 0xa
+    jl .low_not_hex
+    sub bh, 0x27
+
+.low_not_hex:
+    add ah, bh
+
+    pop bx
+    pop si
+    ret

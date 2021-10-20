@@ -19,7 +19,7 @@ feliz_boot_start:
 
     ; Load sectors with kernel
     mov ah, 2
-    mov al, 3   ; Sector count
+    mov al, 4   ; Sector count
     mov ch, 0
     mov cl, 2
     mov dh, 0
