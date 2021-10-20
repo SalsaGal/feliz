@@ -21,7 +21,6 @@ feliz_disk_load_sectors:
     ret
 
 .carry:
-
     popa
     stc
     ret
@@ -74,6 +73,6 @@ feliz_disk_shell_command:
 .subcommand_help: db "help", 0
 
 .help_text:
-db "disk help:          print this help message", 0
+db "disk help:", 0xa, 0xd, "  print this help message", 0
 .missing_subcommand_text: db "Missing subcommand", 0
 .unknown_subcommand_text: db "Unknown subcommand: ", 0

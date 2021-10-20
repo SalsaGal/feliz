@@ -206,10 +206,9 @@ feliz_shell_instruction_to_call:
 .instruction_shutdown: db "shutdown", 0
 
 .help_message:
-db "Feliz Shell Instructions:", 0xa, 0xd
-db "clear:              clear the screen", 0xa, 0xd
-db "disk:               disk storage operations", 0xa, 0xd
-db "help:               print this help message", 0xa, 0xd
-db "reboot:             reboot the computer", 0xa, 0xd
-db "shutdown:           shutdown the computer"
+db "clear:", 0xa, 0xd, "  clear the screen", 0xa, 0xd
+db "disk:", 0xa, 0xd, "  disk storage operations", 0xa, 0xd
+db "help:", 0xa, 0xd, "  print this help message", 0xa, 0xd
+db "reboot:", 0xa, 0xd, "  reboot the computer", 0xa, 0xd
+db "shutdown:", 0xa, 0xd, "  shutdown the computer"
 db 0
