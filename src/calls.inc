@@ -11,3 +11,4 @@ feliz_shell_print_newline           equ 0x001b
 feliz_shell_move_cursor             equ 0x001e
 feliz_shell_instruction_to_call     equ 0x0021
 feliz_string_byte_to_ascii          equ 0x0024
+feliz_disk_load                     equ 0x0027

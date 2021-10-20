@@ -12,6 +12,7 @@ feliz_kernel_call_vectors:
     jmp word feliz_shell_move_cursor
     jmp word feliz_shell_instruction_to_call
     jmp word feliz_string_byte_to_ascii
+    jmp word feliz_disk_load
 
 feliz_kernel_start:
     ; Update data segment
