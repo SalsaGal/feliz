@@ -39,6 +39,9 @@ feliz_kernel_start:
     mov ah, ' '
     call feliz_string_split
 
+    cmp byte [si], 0
+    je .shell
+
     ; Get system calls from command
     call feliz_shell_instruction_to_call
     jc .unknown_instruction
