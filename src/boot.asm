@@ -6,7 +6,7 @@ feliz_boot_start:
     mov ds, ax
 
     ; Set stack segment
-    add ax, 0x0200
+    mov ax, 0x50
     mov ss, ax
 
     mov si, feliz_boot_text_start
@@ -21,19 +21,19 @@ feliz_boot_start:
     mov ah, 2
     mov al, 4   ; Sector count
     mov ch, 0
-    mov cl, 2
+    mov cl, 2   ; Sector number
     mov dh, 0
     
-    mov bx, 0x800
-    mov es, bx
     mov bx, 0
+    mov es, bx
+    mov bx, 0x7e00
     int 0x13
     jc .feliz_boot_fail_load_kernel
 
     mov si, feliz_boot_text_kernel_loaded
     call feliz_boot_string
 
-    jmp 0:0x8000
+    jmp 0:0x7e00
 
 .feliz_boot_fail_disk_reset:
     mov si, feliz_boot_text_fail_reset

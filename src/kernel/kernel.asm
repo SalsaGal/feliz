@@ -19,8 +19,8 @@ feliz_kernel_call_vectors:
     jmp word feliz_shell_print_line
 
 feliz_kernel_start:
-    ; Update data segment
-    mov ax, 0x0800
+    ; Update data and extra segment
+    mov ax, 0x07e0
     mov ds, ax
     mov es, ax
 
