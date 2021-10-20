@@ -14,6 +14,7 @@ feliz_kernel_call_vectors:
     jmp word feliz_string_byte_to_ascii
     jmp word feliz_disk_load_sectors
     jmp word feliz_kernel_dump
+    jmp word feliz_string_get_length
 
 feliz_kernel_start:
     ; Update data segment

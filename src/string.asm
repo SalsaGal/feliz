@@ -95,3 +95,26 @@ feliz_string_byte_to_ascii:
 
     popa
     ret
+
+; IN:
+; si - String pointer
+;
+; OUT:
+; ax - string length
+feliz_string_get_length:
+    push si
+    mov ax, 0
+
+.loop:
+    push ax
+    lodsb
+    cmp al, 0
+    je .end
+    pop ax
+    inc ax
+    jmp .loop
+
+.end:
+    pop ax
+    pop si
+    ret
