@@ -14,3 +14,5 @@ feliz_string_byte_to_ascii          equ 0x0024
 feliz_disk_load_sectors             equ 0x0027
 feliz_kernel_dump                   equ 0x002a
 feliz_string_get_length             equ 0x002d
+feliz_string_ascii_to_byte          equ 0x0030
+feliz_shell_print_line              equ 0x0033
