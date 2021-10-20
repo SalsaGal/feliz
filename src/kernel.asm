@@ -62,6 +62,7 @@ feliz_kernel_start:
     mov di, shell_buffer
 .clear_buffer:
     stosb
+    mov byte [di + (misc_buffer - shell_buffer)], 0
     cmp byte [di], 1
     jne .clear_buffer
 
@@ -154,7 +155,9 @@ feliz_kernel_text_unknown_command: db "Unknown command: ", 0
 %include "shell.asm"
 %include "string.asm"
 
+SHELL_BUFFER_LENGTH equ 78
+
 db 1
-shell_buffer: times 78 db 0
+shell_buffer: times SHELL_BUFFER_LENGTH db 0
 db 1
-misc_buffer: times 78 db 0
+misc_buffer: times SHELL_BUFFER_LENGTH db 0
