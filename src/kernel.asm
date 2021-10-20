@@ -13,6 +13,7 @@ feliz_kernel_call_vectors:
     jmp word feliz_shell_instruction_to_call
     jmp word feliz_string_byte_to_ascii
     jmp word feliz_disk_load_sectors
+    jmp word feliz_kernel_dump
 
 feliz_kernel_start:
     ; Update data segment
@@ -65,7 +66,8 @@ feliz_kernel_start:
 
     jmp .shell
 
-feliz_kernel_panic:
+feliz_kernel_dump:
+    pusha
     mov di, misc_buffer
 
     mov si, .panic_text_0
@@ -128,9 +130,10 @@ feliz_kernel_panic:
     mov si, misc_buffer
     call feliz_shell_print_line
 
-    jmp $
+    popa
+    ret
 
-.panic_text_0: db "FELIZ KERNEL PANIC", 0
+.panic_text_0: db "=FELIZ KERNEL DUMP=", 0
 .panic_text_1: db "ah: 0x", 0
 .panic_text_2: db "al: 0x", 0
 .panic_text_3: db "bh: 0x", 0
