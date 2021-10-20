@@ -175,17 +175,6 @@ feliz_shell_instruction_to_call:
     jmp .end_no_carry
 
 .not_help:
-    mov di, .instruction_disk
-    call feliz_string_equal
-    jnc .not_disk
-
-    ; Disk
-    pop di
-    call feliz_disk_shell_command
-    push di                             ; Push this back to the stack to pop it off at the end of the function
-    jmp .end_no_carry
-
-.not_disk:
 
 .end_carry:
     pop di
@@ -200,14 +189,12 @@ feliz_shell_instruction_to_call:
     ret
 
 .instruction_clear: db "clear", 0
-.instruction_disk: db "disk", 0
 .instruction_help: db "help", 0
 .instruction_reboot: db "reboot", 0
 .instruction_shutdown: db "shutdown", 0
 
 .help_message:
 db "clear:", 0xa, 0xd, "  clear the screen", 0xa, 0xd
-db "disk:", 0xa, 0xd, "  disk storage operations", 0xa, 0xd
 db "help:", 0xa, 0xd, "  print this help message", 0xa, 0xd
 db "reboot:", 0xa, 0xd, "  reboot the computer", 0xa, 0xd
 db "shutdown:", 0xa, 0xd, "  shutdown the computer"
