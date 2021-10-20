@@ -6,7 +6,7 @@
 ; OUT:
 ; es:bx - File cache location
 ; carry if error
-feliz_disk_load:
+feliz_disk_load_sectors:
     pusha
 
     mov ah, 2
