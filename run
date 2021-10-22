@@ -3,7 +3,7 @@
     nasm src/kernel/kernel.asm -o out/kernel.bin -i src/kernel
     dd if=/dev/zero of=out/feliz.img bs=1024 count=1440
     dd if=out/boot.bin of=out/feliz.img conv=notrunc
-    dd if=out/kernel.bin of=out/feliz.img conv=notrunc seek=1
+    dd if=out/kernel.bin of=out/feliz.img conv=notrunc seek=2
 #/
 
 #usb b
@@ -11,7 +11,7 @@
     nasm src/kernel.asm -o out/kernel.bin -i src
     dd if=/dev/zero of=/dev/sdc bs=1024 count=1440
     dd if=out/boot.bin of=/dev/sdc conv=notrunc
-    dd if=out/kernel.bin of=/dev/sdc conv=notrunc seek=1
+    dd if=out/kernel.bin of=/dev/sdc conv=notrunc seek=2
 #/
 
 #- r

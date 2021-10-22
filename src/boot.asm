@@ -21,7 +21,7 @@ feliz_boot_start:
     mov ah, 2
     mov al, 4   ; Sector count
     mov ch, 0
-    mov cl, 2   ; Sector number
+    mov cl, 3   ; Sector number
     mov dh, 0
     
     mov bx, 0
