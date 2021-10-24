@@ -157,3 +157,22 @@ feliz_string_ascii_to_byte:
     pop bx
     pop si
     ret
+
+; IN:
+; si - source
+; di - destination
+; cx - length
+feliz_string_copy_range:
+    pusha
+
+    ; Skipping to the end because otherwise it'd run one more time
+    cmp cx, 0
+    jz .end
+
+.move:
+    movsb
+    loop .move
+
+.end:
+    popa
+    ret
